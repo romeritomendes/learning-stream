@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>Test: Upload Simple File</title>
+        <script>
+            function uploadFile(e) {
+                e.preventDefault();
+
+                const title = document.querySelector('input[name=title]');
+                const file = document.querySelector('input[name=fs01]').files[0];
+                fetch('/upload', {
+                    method: 'POST',
+                    body: file
+                })
+            }
+        </script>
+    </head>
+    <body>
+        <form onsubmit="uploadFile(event, this)">
+            <input type="text" name="title" />
+            <input type="file" name="fs01" />
+            <button type="submit">Upload</button>
+        </form>
+    </body>
+</html>

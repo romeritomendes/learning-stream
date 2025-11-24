@@ -1,0 +1,18 @@
+
+// Git Ignore File for JavaScript Projects
+
+# Ignore common files and directories from version control
+*.log
+node_modules/
+build/
+
+# Ignore specific files
+.idea
+.jest.config.js
+
+# Exclude node_modules directory when using npm install
+!package-lock.json
+
+tmp/
+origin/
+destination/
