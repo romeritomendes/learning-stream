@@ -47,6 +47,8 @@ Acesse `http://localhost:4000/form` para testar o upload.
 
 *Observação: Crie as pastas `origin` e `destination` e coloque um arquivo na pasta `origin` para testar a cópia em streams.*
 
+Para executar:
+```bash
 cd 02.copyFile
 npm install
 npm start
@@ -71,6 +73,8 @@ npm start
 
 *Observação: Crie a pasta `videos` e coloque um arquivo MP4 (exemplo: baixe Sintel.mp4 de http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4)*
 
+Para executar:
+```bash
 cd 03.streamVideo
 npm install
 npm start
