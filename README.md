@@ -4,145 +4,16 @@ Este repositório contém exemplos passo-a-passo para entender como funciona o s
 
 Os projetos seguem uma ordem lógica para construir o conhecimento:
 
-## 01. uploadSimples
-**Objetivo:** Entender uploads básicos de arquivos usando bibliotecas de terceiros.
+## Projetos
 
-### Conceitos Aprendidos:
-- Uso do Multer para lidar com uploads multipart/form-data
-- Como o Multer processa arquivos em streams internamente
-- Servir arquivos estáticos com Express
-- Estrutura básica de um servidor de upload
+1. [01.uploadSimples](./01.uploadSimples/README.md) - Entender uploads básicos de arquivos usando bibliotecas de terceiros.
+2. [02.copyFile](./02.copyFile/README.md) - Aprender a usar streams do Node.js para copiar arquivos eficientemente.
+3. [03.streamVideo](./03.streamVideo/README.md) - Entender como transmitir streaming de mídia (vídeos) para o frontend.
+4. [04.uploadStreamBody](./04.uploadStreamBody/README.md) - Aprender a fazer upload diretamente através de streams, sem intermediários.
+5. [05.videoRange](./05.videoRange/README.md) - Entender como implementar streaming de vídeo com suporte a range requests.
+6. [06.reqresstreams](./06.reqresstreams/README.md) - Explorar como requests e responses HTTP são streams no Node.js.
 
-### O que faz:
-- Servidor Express que recebe uploads via formulário HTML
-- Usa Multer para processar arquivos enviados
-- Exibe headers e informações do arquivo no console
-- Servir o formulário através de `/form`
-
-Para executar:
-```bash
-cd 01.uploadSimples
-npm install
-npm start
-```
-Acesse `http://localhost:4000/form` para testar o upload.
-
----
-
-## 02. copyFile
-**Objetivo:** Aprender a usar streams do Node.js para copiar arquivos eficientemente.
-
-### Conceitos Aprendidos:
-- `fs.createReadStream()` para ler arquivos em chunks
-- `fs.createWriteStream()` para escrever dados em fluxo
-- Evento `'data'` dos streams
-- Método `.pipe()` para conectar streams
-- Vantagens de streams para arquivos grandes (não carrega tudo na memória)
-
-### O que faz:
-- Lê um arquivo da pasta `origin` em streams
-- Escreve para a pasta `destination`
-- Conta e exibe o números de bytes copiados
-- Demonstra o fluxo de dados através de `.pipe()`
-
-*Observação: Crie as pastas `origin` e `destination` e coloque um arquivo na pasta `origin` para testar a cópia em streams.*
-
-Para executar:
-```bash
-cd 02.copyFile
-npm install
-npm start
-```
-
----
-
-## 03. streamVideo
-**Objetivo:** Entender como transmitir streaming de mídia (vídeos) para o frontend.
-
-### Conceitos Aprendidos:
-- Streaming de arquivos binários grandes
-- Transmissão eficiente de conteúdo multimídia
-- Headers apropriados para streaming (Content-Type)
-- Servir streams diretamente para o navegador
-
-### O que faz:
-- Serve arquivos estáticos para a página HTML
-- Endpoint `/video` que lê e transmite vídeo MP4 em streams
-- Página simples com player de vídeo HTML5 tocando o stream
-- Demonstra transmissão básica de mídia sem carregar o vídeo inteiro na memória
-
-*Observação: Crie a pasta `videos` e coloque um arquivo MP4 (exemplo: baixe Sintel.mp4 de http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4)*
-
-Para executar:
-```bash
-cd 03.streamVideo
-npm install
-npm start
-```
-Acesse `http://localhost:4000` para testar o streaming de vídeo.
-
----
-
-## 04. uploadStreamBody
-**Objetivo:** Aprender a fazer upload diretamente através de streams, sem intermediários.
-
-### Conceitos Aprendidos:
-- Streaming direto do corpo da requisição HTTP
-- Uso de `req.pipe()` para redirecionar streams
-- Upload sem bibliotecas como Multer
-- Diferença entre formulários tradicionais e streaming direto
-
-### O que faz:
-- Recebe arquivos através de POST direto (não multipart)
-- Usa JavaScript no frontend para enviar apenas o arquivo como body
-- Redireciona o stream da requisição diretamente para disco
-- Demonstra eficiência para arquivos grandes
-
-Para executar:
-```bash
-cd 04.uploadStreamBody
-npm install
-npm start
-```
-Acesse `http://localhost:4000` para testar o upload via fetch.
-
----
-
-## 05. videoRange
-**Objetivo:** Entender como implementar streaming de vídeo com suporte a range requests para permitir seek, pause e resume no player.
-
-### Conceitos Aprendidos:
-- Range requests HTTP e headers como `Range` e `Content-Range`
-- Transmissão parcial de arquivos para players de vídeo
-- Controle de buffer e otimização de bandwidth
-- Pausar e retomar downloads automaticamente
-
-### O que fará:
-- Servidor que responde a requests com `Range` header
-- Transmite apenas as partes solicitadas do vídeo
-- Suporte a seek forward/backward no player
-- Demonstra pause/resume dinâmico do streaming
-
-*Em breve: Implementação será adicionada.*
-
----
-
-## 06. reqResStreams
-**Objetivo:** Explorar como requests e responses HTTP são streams no Node.js.
-
-### Conceitos Aprendidos:
-- Request (req) como readable stream
-- Response (res) como writable stream
-- Manipulação direta de streams HTTP
-- Pipeline de streams entre client e server
-
-### O que fará:
-- Demonstrações de como req.pipe() e res.end() funcionam
-- Exemplos de transformação de dados em tempo real
-- Integração com outros streams do sistema
-- Aplicações práticas de streams bidirecionais
-
-*Em breve: Implementação será adicionada.*
+Consulte o README.md de cada projeto para informações detalhadas sobre conceitos, implementação e instruções de execução.
 
 ---
 
