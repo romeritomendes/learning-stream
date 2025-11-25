@@ -12,6 +12,7 @@ build/
 
 # Exclude node_modules directory when using npm install
 !package-lock.json
+videos/
 
 tmp/
 origin/

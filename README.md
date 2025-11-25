@@ -45,8 +45,8 @@ Acesse `http://localhost:4000/form` para testar o upload.
 - Conta e exibe o números de bytes copiados
 - Demonstra o fluxo de dados através de `.pipe()`
 
-Para executar:
-```bash
+*Observação: Crie as pastas `origin` e `destination` e coloque um arquivo na pasta `origin` para testar a cópia em streams.*
+
 cd 02.copyFile
 npm install
 npm start
@@ -69,8 +69,8 @@ npm start
 - Página simples com player de vídeo HTML5 tocando o stream
 - Demonstra transmissão básica de mídia sem carregar o vídeo inteiro na memória
 
-Para executar:
-```bash
+*Observação: Crie a pasta `videos` e coloque um arquivo MP4 (exemplo: baixe Sintel.mp4 de http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4)*
+
 cd 03.streamVideo
 npm install
 npm start
