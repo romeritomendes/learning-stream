@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.static('public'));
 
 app.get('/video', (req, res) => {
-    const originFile = fs.createReadStream('./videos/Sintel.mp4');
+    const originFile = fs.createReadStream('../00.resources/videos/Sintel.mp4');
 
     res.setHeader('Content-Type', 'video/mp4');
     originFile.pipe(res);
