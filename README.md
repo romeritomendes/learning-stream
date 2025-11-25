@@ -59,16 +59,15 @@ npm start
 
 ### Conceitos Aprendidos:
 - Streaming de arquivos binários grandes
-- Range requests para vídeo
 - Transmissão eficiente de conteúdo multimídia
-- Headers apropriados para streaming
+- Headers apropriados para streaming (Content-Type)
+- Servir streams diretamente para o navegador
 
-### O que deveria fazer:
-- Ler vídeo em streams
-- Transmitir para frontend em tempo real
-- Suporte a range requests para permitir "seek" no vídeo
-
-*Nota: Este projeto está incompleto no código fonte, apenas estrutura básica do servidor.*
+### O que faz:
+- Serve arquivos estáticos para a página HTML
+- Endpoint `/video` que lê e transmite vídeo MP4 em streams
+- Página simples com player de vídeo HTML5 tocando o stream
+- Demonstra transmissão básica de mídia sem carregar o vídeo inteiro na memória
 
 Para executar:
 ```bash
@@ -76,6 +75,7 @@ cd 03.streamVideo
 npm install
 npm start
 ```
+Acesse `http://localhost:4000` para testar o streaming de vídeo.
 
 ---
 
