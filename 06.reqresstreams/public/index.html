@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <title>Test: Stream Interation</title>
+        <script>
+            function sendToPipe(e) {
+                e.preventDefault();
+
+                const title = document.querySelector('input[name=title]');
+                fetch('/pipe', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain; charset=utf-8'  // Define tipo como texto plano
+                    },
+                    body: title.value
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Dados transformados:', data);
+                    // Opcional: exiba no DOM (ex: document.querySelector('#result').textContent = data;)
+                })
+                .catch(error => console.error('Erro:', error));
+            }
+
+            function sendToTransform(e) {
+                e.preventDefault();
+
+                const file = document.querySelector('input[name=fs01]').files[0];
+                fetch('/transform', {
+                    method: 'POST',
+                    //headers: {
+                    //    'Content-Type': 'text/plain; charset=utf-8'  // Define tipo como texto plano
+                    //},
+                    body: file
+                })
+                .then(response => response.blob())
+                .then(data => {
+                    console.log('Dados transformados:');
+                    
+                    const url = URL.createObjectURL(data);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'meuarquivo.gz';
+                    a.click();
+                })
+                .catch(error => console.error('Erro:', error));
+            }
+
+            function sendToMerge(e) {
+                e.preventDefault();
+
+                const file = document.querySelector('input[name=fs02]').files[0];
+                fetch('/merge', {
+                    method: 'POST',
+                    body: file
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Dados transformados:', data);
+                    // Opcional: exiba no DOM (ex: document.querySelector('#result').textContent = data;)
+                })
+                .catch(error => console.error('Erro:', error));
+            }
+        </script>
+    </head>
+    <body>
+        <form onsubmit="sendToPipe(event, this)">
+            <h1>Send to Pipe</h1>
+            <input type="text" name="title" value="test to upper case"/>
+            <button type="submit">PIPE</button>
+        </form>
+        <form onsubmit="sendToTransform(event, this)">
+            <h1>Send to Transform</h1>
+            <input type="file" name="fs01" />
+            <button type="submit">TRANSFORM</button>
+        </form>
+        <form onsubmit="sendToMerge(event, this)">
+            <h1>Send to Merge</h1>
+            <input type="file" name="fs02" />
+            <button type="submit">MERGE</button>
+        </form>
+    </body>
+</html>
