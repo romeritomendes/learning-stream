@@ -60,6 +60,27 @@
                 })
                 .catch(error => console.error('Erro:', error));
             }
+
+            function sendToMulti(e) {
+                e.preventDefault();
+
+                const name = document.querySelector('input[name=name]');
+                const file = document.querySelector('input[name=fs03]').files[0];
+
+                const fromData = new FormData();
+                fromData.append('name', name.value);
+                fromData.append('file', file);
+                fetch('/multi', {
+                    method: 'POST',
+                    body: fromData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Dados transformados:', data);
+                    // Opcional: exiba no DOM (ex: document.querySelector('#result').textContent = data;)
+                })
+                .catch(error => console.error('Erro:', error));
+            }
         </script>
     </head>
     <body>
@@ -77,6 +98,12 @@
             <h1>Send to Merge</h1>
             <input type="file" name="fs02" />
             <button type="submit">MERGE</button>
+        </form>
+        <form onsubmit="sendToMulti(event, this)">
+            <h1>Send to Multi</h1>
+            <input type="text" name="name" value="test"/>
+            <input type="file" name="fs03" />
+            <button type="submit">MULTI</button>
         </form>
     </body>
 </html>

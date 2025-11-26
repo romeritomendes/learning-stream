@@ -3,6 +3,7 @@ import cors from 'cors';
 import { pipeline, Transform } from 'node:stream'
 import fs from 'node:fs';
 import Zlib from 'node:zlib';
+import busboy from 'busboy';
 
 const app = express();
 app.use(cors());
@@ -58,6 +59,42 @@ app.post('/merge', (req, res) => {
 //TODO Demonstração 4: Processamento de corpos multipart com múltiplos campos
 // Crie endpoint `/multi` que recebe multipart/form-data com múltiplos campos (texto e arquivo), processa cada tipo usando streams, e retorna os dados processados via res.
 app.post('/multi', (req, res) => {
+    const resp: {
+        fields: Record<string, any>,
+        files: Array<{ name: string, filename: string }>
+    } = {
+        fields: {},
+        files: []
+    };
+    const bb = busboy({ headers: req.headers });
+
+    bb.on('file', (name, file, info) => {
+        const { filename, encoding, mimeType } = info;
+        console.log(
+            `File [${name}]: filename: %j, encoding: %j, mimeType: %j`,
+            filename,
+            encoding,
+            mimeType
+        );
+        const destFile = fs.createWriteStream(`./tmp/${filename}`);
+        file.pipe(destFile);
+        resp.files.push({
+            name: name,
+            filename: filename
+        });
+    });
+
+    bb.on('field', (name, val, info) => {
+        console.log(`Field [${name}]: value: %j`, val);
+
+        resp.fields[name] = val;
+    });
+    
+    bb.on('close', () => {
+        res.status(200).json(resp).end();
+    });
+
+    req.pipe(bb);
 });
 
 app.listen(PORT, () => {

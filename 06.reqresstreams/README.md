@@ -17,7 +17,11 @@ Este projeto expande o conhecimento adquirido nos projetos 01 (uploadSimples), 0
 - Integração com outros streams do sistema
 - Processamento de corpos multipart com múltiplos campos usando streams
 
-*Em breve: Implementação será adicionada.*
+### Implementações:
+- **`/pipe`** (Demonstração 1): Transformação básica – recebe dados via `req.pipe()`, transforma texto para maiúsculo usando Transform stream e retorna via `res`.
+- **`/transform`** (Demonstração 2): Compressão em tempo real – recebe dados binários, aplica compressão gzip usando `Zlib.createGzip()` e retorna arquivo .gz comprimido.
+- **`/merge`** (Demonstração 3): Integração com streams – recebe dados via `req.pipe()` e os anexa a um arquivo existente usando `fs.createWriteStream`.
+- **`/multi`** (Demonstração 4): Processamento multipart – recebe `multipart/form-data` com campos de texto e arquivos, processa usando `busboy` e streams, salva arquivos em disco e loga campos.
 
 ---
 
