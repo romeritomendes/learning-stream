@@ -1,0 +1,33 @@
+{
+  "name": "07.encryptionrealtime",
+  "version": "1.0.0",
+  "description": "**Objetivo:** Explodir sua mente sobre o que é possível fazer com Transform Streams além de texto. Criar um \"Cofre de Arquivos\" que criptografa vídeos e outros binários enquanto lê, tornando-os impossíveis de abrir sem senha.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch ./src/index.ts",
+    "enc": "tsx watch ./src/index-cli.ts -c test.txt",
+    "dec": "tsx watch ./src/index-cli.ts -d test.txt.enc",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "start-enc": "node ./dist/index-cli.js -c test.txt",
+    "start-dec": "node ./dist/index-cli.js -d test.txt.enc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.10.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "multer": "^2.0.2"
+  }
+}

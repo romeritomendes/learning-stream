@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Encryptor/Decryptor</title>
+    </head>
+    <body>
+        <form action="/encrypt" method="post" enctype="multipart/form-data">
+            <h1>Encryptor</h1>
+            <input type="text" name="decMessage" placeholder="Decrypted message"/>
+            <input type="file" name="secret"/>
+            <button type="submit">Encrypt</button>
+        </form>
+        <form action="/decrypt" method="post" enctype="multipart/form-data">
+            <h1>Decryptor</h1>
+            <input type="text" name="encMessage" placeholder="Encrypted message"/>
+            <input type="file" name="secret"/>
+            <button type="submit">Decrypt</button>
+        </form>
+</html>
