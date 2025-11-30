@@ -16,12 +16,16 @@ Os projetos seguem uma ordem lógica para construir o conhecimento:
 ### Próximos Projetos Avançados (Transform Streams)
 
 7. **Criptografia em Tempo Real (Binary Stream)** - O poder dos Transform Streams brilha com dados binários. Ao invés de substituir texto, vamos transformar bytes legíveis em dados criptografados, como em túneis VPN/SSH. Usando `crypto.createCipheriv` e `crypto.createDecipheriv` com vetores de inicialização (IV), criaremos um "Cofre de Arquivos" que criptografa vídeos e outros binários enquanto lê, tornando-os impossíveis de abrir sem a senha.
+#TODO
 
 8. **Compactação "On-the-fly" (Gzip)** - Servidores não salvam arquivos .zip, mas compactam streams em tempo real como o browser mostra em `Content-Encoding: gzip`. Usando `zlib.createGzip()`, vamos adicionar uma camada de compressão aos nossos servidores HTTP existentes, reduzindo drasticamente o tamanho dos dados transferidos na rede (transfer size vs resource size no Network tab).
+#TODO
 
 9. **Streams em "Object Mode" (ETL - Data Engineering)** - Saindo do mundo de arquivos e entrando em bancos de dados. Com `objectMode: true`, streams podem processar objetos JavaScript. Criaremos um "Importador de CSV Gigante" que lê CSVs de 2GB+ linha por linha (sem carregar na memória), converte em objetos JSON, sanitiza dados (formatação de emails, limpeza) e prepara para salvar em bancos simulados.
+#TODO
 
 10. **Transformação de Mídia (Hex Dumper - Bônus)** - Para visualização, manipularemos estruturas de arquivos binários criando um comando similar ao `hexdump` do Linux. Transformaremos cada byte em valores hexadecimais (255 → FF) e formatarão a saída para legibilidade (16 bytes por linha), analisando arquivos como imagens via terminal.
+#TODO
 
 Consulte o README.md de cada projeto para informações detalhadas sobre conceitos, implementação e instruções de execução.
 
