@@ -1,0 +1,25 @@
+{
+  "name": "08.compressiongzip",
+  "version": "1.0.0",
+  "description": "**Objetivo:** Entender como servidores web não salvam arquivos .zip, mas compactam streams em tempo real. Quando o browser recebe HTML e vê `Content-Encoding: gzip` no header, significa que o servidor compactou o stream antes de enviar. Usando `zlib.createGzip()`, reduziremos drasticamente o tamanho transferido (transfer size) vs recurso original (resource size).",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch ./src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.10.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
