@@ -32,5 +32,8 @@ export class CsvProcessor {
                 callback(null, JSON.stringify(csvLine));
             }
         });
+
+        this.file.pipe(transform);
+        return transform;
     }
 }
