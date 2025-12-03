@@ -1,42 +1,73 @@
 import type { ReadStream } from 'node:fs';
 import { Transform } from 'node:stream';
 
-export class CsvProcessor {
+type Options = {
     file: ReadStream;
+    separated: string;
+    newline: string;
+}
 
-    constructor({ file }: { file: ReadStream }) {
-        this.file = file;
+export class CsvProcessor {
+    options: Options;
+
+    constructor({ file, separated = ',', newline = '\n' }: Pick<Options, 'file'> & Partial<Pick<Options, 'newline' | 'separated'>>) {
+        this.options = {
+            file,
+            separated,
+            newline
+        };
     }
 
-    convertCsvToJSON(separated: string = ',') {
-        let csvLine: Object[] = [];
+    convertCsvToJSON() {
+        let jsonObject: Object[] = [];
+        const that = this;
         const transform = new Transform({
             transform(chunk, encoding, callback) {
-                const bufLine: string[] = chunk.toString().split('\n');;
+                const bufLine: string[] = chunk.toString().split(that.options.newline);
                 // console.log(bufLine)
 
-                let headerLine = [''];
-                bufLine.forEach((line, idx) => {
-                    if(idx === 0) {
-                        headerLine = line.split(separated);
-                        // console.log(headerLine)
-                        return;
-                    }
+                if(!bufLine || bufLine.length < 2) throw new Error('The file need to have more than one line');
 
-
-                    const rowLine = line.split(separated);
-                    const jsonLine: Record<string, string> = {};
-                    headerLine.forEach((head, hIdx) => {
-                        jsonLine[head] = rowLine[hIdx] as string || '';
-                    });
-                    // console.log(jsonLine)
-                    csvLine.push(jsonLine);
-                });
-                callback(null, JSON.stringify(csvLine));
+                const jsonObject = that.extractItems(bufLine);
+                
+                callback(null, JSON.stringify(jsonObject));
             }
         });
 
-        this.file.pipe(transform);
+        this.options.file.pipe(transform);
         return transform;
+    }
+
+    extractHeader(line: string) {
+        const headerLine = line.split(this.options.separated);
+        return headerLine || [''];
+    }
+
+    extractItems(lines: string[]) {
+        const headerLine = this.extractHeader(lines[0] as string);
+
+        return lines.slice(1).map((line, idx) => {
+            const rowLine = line.split(this.options.separated);
+
+            const jsonLine: Record<string, string | number> = {};
+            headerLine.forEach((head, hIdx) => {
+                switch (head) {
+                    case 'email':
+                        jsonLine[head] = rowLine[hIdx]?.toLowerCase() as string || '';
+                        break;
+
+                    case 'age':
+                    case 'number':
+                        jsonLine[head] = Number(rowLine[hIdx]) || 0;
+                        break;
+                
+                    default:
+                        jsonLine[head] = rowLine[hIdx] as string || '';
+                        break;
+                }
+            });
+
+            return jsonLine;
+        });
     }
 }

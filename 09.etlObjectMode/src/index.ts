@@ -38,9 +38,10 @@ app.post('/upload', uploader.single('myCSV'),(req, res) => {
 
     const origFile = fs.createReadStream(req.file?.path);
     new CsvProcessor({
-        file: origFile
-    }).convertCsvToJSON('|"').pipe(res);
-    // origFile.pipe(tranform).pipe(res);
+        file: origFile,
+        separated: ',',
+        newline: '\r\n'
+    }).convertCsvToJSON().pipe(res);
 });
 
 const PORT = process.env.PORT || 4000;
