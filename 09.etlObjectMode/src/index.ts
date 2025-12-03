@@ -29,11 +29,17 @@ app.post('/upload', uploader.single('myCSV'),(req, res) => {
     res.writeHead(200, {
         "content-type": 'application/json'
     });
+    
+    res.on('finish', () => {
+        fs.unlink((req.file?.path as string), err => {
+            if(err) console.warn('Temp cleanup failed:', err);
+        });
+    })
 
     const origFile = fs.createReadStream(req.file?.path);
     new CsvProcessor({
         file: origFile
-    }).convertCsvToJSON().pipe(res);
+    }).convertCsvToJSON('|"').pipe(res);
     // origFile.pipe(tranform).pipe(res);
 });
 

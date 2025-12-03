@@ -12,21 +12,24 @@ export class CsvProcessor {
         let csvLine: Object[] = [];
         const transform = new Transform({
             transform(chunk, encoding, callback) {
-                const bufLine: string[] = chunk.toString().split('\r\n');;
-                console.log(bufLine)
+                const bufLine: string[] = chunk.toString().split('\n');;
+                // console.log(bufLine)
 
                 let headerLine = [''];
                 bufLine.forEach((line, idx) => {
                     if(idx === 0) {
                         headerLine = line.split(separated);
+                        // console.log(headerLine)
                         return;
                     }
+
 
                     const rowLine = line.split(separated);
                     const jsonLine: Record<string, string> = {};
                     headerLine.forEach((head, hIdx) => {
-                        jsonLine[head] = rowLine[hIdx] as string;
+                        jsonLine[head] = rowLine[hIdx] as string || '';
                     });
+                    // console.log(jsonLine)
                     csvLine.push(jsonLine);
                 });
                 callback(null, JSON.stringify(csvLine));
